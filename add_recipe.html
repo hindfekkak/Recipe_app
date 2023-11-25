@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe</title>
+</head>
+<body>
+    <h1>Add a New Recipe</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <label for="name">Recipe Name:</label>
+        <input type="text" name="name" required>
+
+        <label for="ingredients">Ingredients:</label>
+        <textarea name="ingredients" required></textarea>
+
+        <label for="steps">Steps:</label>
+        <textarea name="steps" required></textarea>
+
+        <label for="preparation_time">Preparation Time (minutes):</label>
+        <input type="number" name="preparation_time" required>
+
+        <label for="image">Recipe Image:</label>
+        <input type="file" name="image">
+
+        <button type="submit">Add Recipe</button>
+    </form>
+
+    <p><a href="{{ url_for('index') }}">Back to Recipes</a></p>
+</body>
+</html>

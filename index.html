@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <h1>Welcome to the Recipe App, {{ current_user.username }}!</h1>
+
+    <form action="{{ url_for('index') }}" method="GET">
+        <label for="search">Search:</label>
+        <input type="text" name="search" id="search" placeholder="Search by name, ingredients, or preparation time">
+        <button type="submit">Search</button>
+    </form>
+
+    <section id="recipes">
+        {% for recipe in recipes %}
+            <div class="recipe">
+                <h3>{{ recipe.name }}</h3>
+                <p>Ingredients: {{ recipe.ingredients }}</p>
+                <p>Steps: {{ recipe.steps }}</p>
+                <p>Preparation Time: {{ recipe.preparation_time }} minutes</p>
+
+                {% if recipe.image %}
+                    <img src="{{ url_for('uploaded_file', filename=recipe.image) }}" alt="Recipe Image">
+                {% endif %}
+
+                <p>Author: {{ recipe.author.username }}</p>
+
+                <p>
+                    <a href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}">Edit</a>
+                    <a href="{{ url_for('delete_recipe', recipe_id=recipe.id) }}">Delete</a>
+                </p>
+            </div>
+            <hr>
+        {% endfor %}
+
+        {% if recipes|length == 0 %}
+            <p>No recipes found.</p>
+        {% endif %}
+    </section>
+
+    <p>
+        <a href="{{ url_for('add_recipe') }}">Add a New Recipe</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe</title>
+</head>
+<body>
+    <h1>Edit Recipe</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <label for="name">Recipe Name:</label>
+        <input type="text" name="name" value="{{ recipe.name }}" required>
+
+        <label for="ingredients">Ingredients:</label>
+        <textarea name="ingredients" required>{{ recipe.ingredients }}</textarea>
+
+        <label for="steps">Steps:</label>
+        <textarea name="steps" required>{{ recipe.steps }}</textarea>
+
+        <label for="preparation_time">Preparation Time (minutes):</label>
+        <input type="number" name="preparation_time" value="{{ recipe.preparation_time }}" required>
+
+        <label for="image">Recipe Image:</label>
+        <input type="file" name="image">
+
+        {% if recipe.image %}
+             <img src="{{ url_for('uploaded_file', filename=recipe.image) }}" alt="Recipe Image">
+
+        {% endif %}
+
+        <button type="submit">Update Recipe</button>
+    </form>
+
+    <p><a href="{{ url_for('index') }}">Back to Recipes</a></p>
+</body>
+</html>
